@@ -10,10 +10,25 @@ Pane{
 		id: relay
 	}
 	
-	
+	InfraredThermometer {
+		id: thermometer
+	}
 	
 	ColumnLayout{
     spacing: 2
+	
+		Label {
+			text: "Thermometer Device Name: " + thermometer.name
+		}
+		
+		Label {
+			text: "Thermometer Device Connected: " + thermometer.connected
+		}
+		Label {
+			text: "Temperature: " + thermometer.temperature
+		}
+		
+		
 		Label {
 			text: "Relay Device Name: " + relay.name
 		}
