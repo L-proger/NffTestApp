@@ -36,15 +36,19 @@ Pane{
 		Label {
 			text: "Relay Device Connected: " + relay.connected
 		}
+		
+		Label {
+			text: "Relay Device Wired: " + relay.wired
+		}
 	
 		Button {
 			text: "Relay ON"
-			onClicked: relay.wire(true)
+			onClicked: relay.wired = true
 		}
 		
 		Button {
 			text: "Relay OFF"
-			onClicked: relay.wire(false)
+			onClicked: relay.wired = false
 		}
 	}
 }
