@@ -4,7 +4,7 @@ import QtQuick.Layouts 1.15
 import NoFlipFlops 1.0
 
 Pane{
-    id: root
+	id: root
 	
 	Relay {
 		property var hysteresisLow: -2.0
@@ -42,25 +42,25 @@ Pane{
 
 		
 		Text {
-            anchors.horizontalCenter: parent.horizontalCenter
-            font.pixelSize: 75
-            padding: 50
-            color: thermometer.temperature < targetTemperatureSlider.value ? "dodgerblue" : "orangered"
-            text: thermometer.temperature.toFixed(1)+" C°"
-        }
+			anchors.horizontalCenter: parent.horizontalCenter
+			font.pixelSize: 75
+			padding: 50
+			color: thermometer.temperature < targetTemperatureSlider.value ? "dodgerblue" : "orangered"
+			text: thermometer.temperature.toFixed(1)+" C°"
+		}
 		
 		Text {
-            anchors.horizontalCenter: parent.horizontalCenter
-            font.pixelSize: 40
-            text: "target: "+targetTemperatureSlider.value.toFixed(1)+" C°"
-        }
+			anchors.horizontalCenter: parent.horizontalCenter
+			font.pixelSize: 40
+			text: "target: "+targetTemperatureSlider.value.toFixed(1)+" C°"
+		}
 		
 		Slider {
-            id: targetTemperatureSlider
-            width: parent.width
-            from: 0
-            to: 100
-            stepSize: 0.5
-        }
+			id: targetTemperatureSlider
+			width: parent.width
+			from: 0
+			to: 100
+			stepSize: 0.5
+		}
 	}
 }
