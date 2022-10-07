@@ -7,48 +7,60 @@ Pane{
     id: root
 	
 	Relay {
+		property var hysteresisLow: -2.0
+		property var hysteresisHi: -1.0
 		id: relay
+		
+		wired: {
+			thermometer.connected ?
+			(
+				(thermometer.temperature < (targetTemperatureSlider.value + hysteresisLow)) ? true :
+				((thermometer.temperature > (targetTemperatureSlider.value + hysteresisHi)) ? false : thermometer.connected)
+			
+			) : false
+			
+		}
 	}
 	
 	InfraredThermometer {
 		id: thermometer
 	}
 	
-	ColumnLayout{
-    spacing: 2
-	
+	Column{
+		anchors.fill: parent
 		Label {
-			text: "Thermometer Device Name: " + thermometer.name
+			text: "Thermometer Connected: " + thermometer.connected
 		}
 		
 		Label {
-			text: "Thermometer Device Connected: " + thermometer.connected
-		}
-		Label {
-			text: "Temperature: " + thermometer.temperature
-		}
-		
-		
-		Label {
-			text: "Relay Device Name: " + relay.name
+			text: "Relay Connected: " + relay.connected
 		}
 		
 		Label {
-			text: "Relay Device Connected: " + relay.connected
+			text: "Relay Wired: " + relay.wired
 		}
+
 		
-		Label {
-			text: "Relay Device Wired: " + relay.wired
-		}
-	
-		Button {
-			text: "Relay ON"
-			onClicked: relay.wired = true
-		}
+		Text {
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.pixelSize: 75
+            padding: 50
+            color: thermometer.temperature < targetTemperatureSlider.value ? "dodgerblue" : "orangered"
+            text: thermometer.temperature.toFixed(1)+" C°"
+        }
 		
-		Button {
-			text: "Relay OFF"
-			onClicked: relay.wired = false
-		}
+		Text {
+            anchors.horizontalCenter: parent.horizontalCenter
+            font.pixelSize: 40
+            text: "target: "+targetTemperatureSlider.value.toFixed(1)+" C°"
+        }
+		
+		Slider {
+            id: targetTemperatureSlider
+            width: parent.width
+            from: 0
+            to: 100
+            stepSize: 0.5
+        }
 	}
 }
